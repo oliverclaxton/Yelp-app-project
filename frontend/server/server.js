@@ -95,10 +95,16 @@ app.put("/restaurants/:id", async (req,res)=>{
 })
 
  //delete route 
- app.delete("/restaurants/:id",(req,res)=>{
-     res.status(204).json({
-         status:"success"
-     })
+ app.delete("/restaurants/:id",async (req,res)=>{
+     try{
+        const results = await db.query("DELETE FROM restaurants where id = $1", [req.params.id])
+        res.status(204).json({
+            status:"success"
+        })
+     }catch(err){
+         console.log(err)
+     }
+     
  })
 
 
