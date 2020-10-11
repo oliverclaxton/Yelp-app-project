@@ -1,25 +1,24 @@
 require("dotenv").config();
 const express = require('express')
+const cors = require('cors')
 const db = require('./db')
 const morgan = require('morgan')
 const app = express()
 const port = process.env.PORT || 3000
 
 //middleware
+app.use(cors())
 app.use(express.json())
 
 
-// home page
-app.get('/', (req, res) => {
-  res.send('Hello World!/home page')
-})
+
 
 // get all resturants
 app.get('/restaurants', async (req, res) => {
 
     try{
         const results = await db.query("select * from restaurants")
-        console.log(results)
+        // console.log(results)
         res.status(200).json({
             status:"success",
             results: results.rows.length,
@@ -62,7 +61,7 @@ res.status(200).json({
 app.post("/restaurants", async (req,res) => {
 try{
     const results = await db.query("INSERT INTO restaurants(name, location, price_range) values ($1,$2,$3) returning *", [req.body.name, req.body.location, req.body.price_range])
-    console.log(results)
+    // console.log(results)
     res.status(201).json({
         status:"success",
         data:{ 
@@ -80,7 +79,7 @@ app.put("/restaurants/:id", async (req,res)=>{
     try{
         const results = await db.query("UPDATE restaurants SET name = $1, location = $2, price_range = $3 where id = $4 returning *", [req.body.name, req.body.location, req.body.price_range, req.params.id] )
 
-        console.log(results)
+        // console.log(results)
         res.status(200).json({
             status:"success",
             data:{
