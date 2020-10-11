@@ -21,7 +21,7 @@ const RestaurantList = () => {
                         <td>$$</td>
                         <td>Rating</td>
                         <td><button className="btn btn-warning">Edit</button></td>
-                        <td><button className="btn btn-danger">delete</button></td>
+                        <td><button className="btn btn-danger">Delete</button></td>
                     </tr>
                     <tr>
                         <td>Mcd's</td>
@@ -29,7 +29,7 @@ const RestaurantList = () => {
                         <td>$$</td>
                         <td>Rating</td>
                         <td><button className="btn btn-warning">Edit</button></td>
-                        <td><button className="btn btn-danger">delete</button></td>
+                        <td><button className="btn btn-danger">Delete</button></td>
                     </tr>
                     <tr>
                         <td>Mcd's</td>
@@ -37,7 +37,7 @@ const RestaurantList = () => {
                         <td>$$</td>
                         <td>Rating</td>
                         <td><button className="btn btn-warning">Edit</button></td>
-                        <td><button className="btn btn-danger">delete</button></td>
+                        <td><button className="btn btn-danger">Delete</button></td>
                     </tr>
                 </tbody>
             </table>
