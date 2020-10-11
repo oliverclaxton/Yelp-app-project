@@ -16,27 +16,48 @@ app.get('/', (req, res) => {
 
 // get all resturants
 app.get('/restaurants', async (req, res) => {
-    const results = await db.query("select * from restaurants")
- console.log(results)
-  res.status(200).json({
-      status:"success",
-      data:{
-          resturants:["mcdonals","wendys"],
-      },
-  });
+
+    try{
+        const results = await db.query("select * from restaurants")
+        console.log(results)
+        res.status(200).json({
+            status:"success",
+            results: results.rows.length,
+            data:{
+                resturants: results.rows,
+            },
+        });
+    } catch(err){
+        console.log(err)
+    }
+    
+ 
 });
 
 // get one resturant
-app.get("/restaurants/:id",(req,res)=>{
-    res.status(200).json({
-        status:"success",
-        data:{
-            restuarant:["mcdonals"]
-        }
-    })
-    console.log(req.params)
+app.get("/restaurants/:id", async (req,res) => {
+   
+try{
+const results = await db.query("select * from restaurants where id = $1", [req.params.id])
+res.status(200).json({
+    status:"success",
+    data:{
+        restuarant: results.rows[0]
+    }
+})
+}catch(err){
+    console.log(err)
+
+}
+
+
+    
 })
 
+
+
+
+// now doing post route !!
 // create route
 app.post("/restaurants",(req,res) => {
     res.status(201).json({
