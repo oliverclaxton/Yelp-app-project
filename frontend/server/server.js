@@ -59,13 +59,21 @@ res.status(200).json({
 
 // now doing post route !!
 // create route
-app.post("/restaurants",(req,res) => {
+app.post("/restaurants", async (req,res) => {
+try{
+    const results = await db.query("INSERT INTO restaurants(name, location, price_range) values ($1,$2,$3) returning *", [req.body.name, req.body.location, req.body.price_range])
+    console.log(results)
     res.status(201).json({
         status:"success",
-        data:{
-            resturant: "mcdonalds",
+        data:{ 
+            restaurant: results.rows[0],
         },
     })
+} catch(err){
+ console.log(err)
+}
+
+    
 
 })
 
